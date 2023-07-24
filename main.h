@@ -1,20 +1,34 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-/*** STANDARD LIBRARIES ***/
+/** STANDARD LIBRARIES **/
+
+#include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <stdarg.h>
 #include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-/*** FUNCTIONS PROTOTYPES ***/
 
+/** FUNCTIONS PROTOTYPES **/
 int _printf(const char *format, ...);
+int select_format(va_list args,char format);
 int _putchar(char c);
-int _printstr(char *s);
+int _printchar(va_list arg);
+int _printstr(va_list arg);
+int _printpers(va_list arg);
 
-/*** SYMBOLIC CONSTANTS MACROS ***/
+
+/** SYMBOLIC CONSTANT MACROS **/
 
 #define ONEBYTE 1
 
-#endif /** MAIN_H **/
+/**  **/
+
+typedef struct mystruct
+{
+  char sign;
+  int (*fun)(va_list);
+}mystruct;
+
+
+#endif /*** MAIN_H ***/

@@ -2,54 +2,43 @@
 
 
 /**
-* _printf - the main function in printf project .
+* _printf - prints formated string .
 *
-* @format: string and start of args .
+* @format: string .
 *
 * Return: number of printed chars .
-*
-*
-*
 */
+
 
 int _printf(const char *format, ...)
 {
-int count = 0;
-char c;
-char *str;
-va_list arg;
-if (format == NULL)
+
+int printed = 0;
+int i = 0;
+va_list args;
+
+if (format == NULL || format[i] == '\0')
 return (-1);
-va_start(arg, format);
-while (*format)
+
+va_start(args, format);
+
+
+while (format[i] != '\0')
 {
-if (*format == '%')
+if (format[i] != '%')
 {
-format++;
-switch (*format)
-{
-case 'c':
-c = va_arg(arg, int);
-count += _putchar(c);
-break;
-case 's':
-str = va_arg(arg, char *);
-count += _printstr(str);
-break;
-case '%':
-count += _putchar(*format);
-break;
-default:
-count += _putchar(*format);
-continue;
-}
+printed += _putchar(format[i]);
 }
 else
 {
-count += _putchar(*format);
+i++;
+printed += select_format(args, format[i]);
 }
-format++;
+i++;
 }
-va_end(arg);
-return (count);
+
+va_end(args);
+
+return (printed);
+
 }
